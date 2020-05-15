@@ -27,41 +27,6 @@ function MenuService($http, ApiPath) {
     });
   };
 
-
-  service.getMenuItems = function (shortName) {
-    var config = {};
-    if (shortName) {
-      config.params = {category: shortName};
-    }
-
-    return $http.get(ApiPath + '/menu_items.json', config).then(function (response) {
-      return response.data;
-    });
-  }
-
-
-  service.getCategory = function (shortName) {
-    return $http.get(ApiPath + '/categories/' + shortName + '.json').then(function (response) {
-      return response.data;
-    });
-  };
-
-
-  service.getMenuItem = function(shortName) {
-    return $http.get(ApiPath + '/menu_items/' + shortName + '.json')
-    .then(function(response) {
-      return response.data;
-    });
-  };
-
-
-  service.saveMenuItem = function (menuItem) {
-    return $http.put(ApiPath + '/menu_items/' + menuItem.short_name, menuItem)
-    .then(function (response) {
-      return response.data;
-    });
-  };
-
 }
 
 
