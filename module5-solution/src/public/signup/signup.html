@@ -1,0 +1,91 @@
+<div>
+    <h1>Sign Up for Notifications</h1>
+    <fieldset>
+      <legend style="color:red">Registration</legend>
+      <form name='regForm' novalidate>
+         
+        <input type="text" name="firstname" placeholder="Enter first name"
+          ng-model="reg.user.firstname"
+          required
+        >
+         
+          <span
+            ng-if="(regForm.firstname.$error.required) && regForm.firstname.$touched">
+            Enter first name
+          </span>
+          <br>
+
+          <input type="text" name="lastname" placeholder="Enter last name"
+          ng-model="reg.user.lastname"
+          required
+        >
+      
+          <span
+            ng-if="(regForm.lastname.$error.required) && regForm.lastname.$touched">
+            Enter last name
+          </span>
+          <br>
+
+
+
+        <input type="email" name="email" placeholder="Email"
+          ng-model="reg.user.email"
+          required>
+          <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+            Must be a valid email address: handle@domain format
+          </span>
+          <br>
+
+        <input type="text" name="phone" placeholder="Phone ###-###-####"
+          ng-model="reg.user.phone"
+          pattern="(\d{3})-(\d{3})-(\d{4})">
+          <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+          <br>
+
+          <input type="text" name="favitem" placeholder="favorite item"
+          ng-model="reg.user.favitem"
+         required>
+         <span ng-if="regForm.favitem.$invalid && !regForm.favitem.$touched">Enter your favorite item in short_name format. Example: "L16" if you want to save string beans </span>
+          <span ng-if="regForm.favitem.$invalid && regForm.favitem.$touched">
+           enter a favorite menu item in short_name format. For example- "L16" for string beans.
+          </span>
+          <span style="color:red"; ng-if="reg.item==='does not exist' && reg.completed && !regForm.favitem.$invalid ">
+            No such menu number exists! Try again! 
+          </span>
+          <br>
+
+        <button
+          style="color:black; background:brown;"
+          ng-disabled="regForm.$invalid"
+          ng-click="reg.submit()">Submit</button>
+
+          <div style="margin-top: 10px;">
+          Required Fields Filled Before Pressing "Submit" to validate favorite item? {{ regForm.$valid }}
+          </div>
+      </form>
+    </fieldset>
+
+    <div id="info" ng-if="reg.completed">
+
+      Firstname: {{ reg.user.firstname}} <br>
+      Lastname: {{ reg.user.lastname}} <br>
+      Email: {{ reg.user.email}} <br>
+      Phone: {{ reg.user.phone }}<br>
+
+      <div>Item: {{ reg.user.favitem.toUpperCase()}}
+        <span style="color:red"; ng-if="reg.item==='does not exist'">
+          No such menu number exists!
+        </span>
+        <span style="color:green"; ng-if="reg.item !== 'does not exist'">
+        Your information has been saved. Check the <a ui-sref="public.myinfo({favItem:reg.user.favitem})">"My Info"</a>tab to view w/ pictures and descriptions.
+        </span>
+    </div>
+    
+
+   
+     
+    </div>
+
+  </div>
